@@ -88,7 +88,12 @@ TABLES['olist_order_reviews_dataset'] = (
         review_comment_title varchar(50),
         review_comment_message varchar(250),
         review_creation_date datetime,
-        review_answer_timestamp datetime
+        review_answer_timestamp datetime,
+        PRIMARY KEY (review_id),
+        FOREIGN KEY (order_id)
+            REFERENCES olist_orders_dataset(order_id)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
         )''' )
 
 TABLES['olist_products_dataset'] = (
