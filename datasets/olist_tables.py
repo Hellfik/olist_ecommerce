@@ -1,7 +1,7 @@
 import sqlite3
 
 
-DB_NAME = 'olist_db'
+DB_NAME = 'olist_db.db'
 
 con = sqlite3.connect(DB_NAME)
 cur = con.cursor()
@@ -58,12 +58,12 @@ TABLES['olist_order_items_dataset'] = (
         seller_id char(32) NOT NULL,
         shipping_limit_date datetime,
         price DECIMAL(9,2) NOT NULL,
-        freight_value DECIMAL (8,2)
+        freight_value DECIMAL (8,2),
         PRIMARY KEY (order_id),
         FOREIGN KEY (product_id)
             REFERENCES olist_products_dataset(product_id)
             ON DELETE CASCADE
-            ON UPDATE CASCADE
+            ON UPDATE CASCADE,
         FOREIGN KEY (seller_id)
             REFERENCES olist_sellers_dataset(seller_id)
             ON DELETE CASCADE
@@ -125,7 +125,7 @@ TABLES['olist_sellers_dataset'] = (
 TABLES['product_category_name_translation'] = (
     '''CREATE TABLE product_category_name_translation (
         product_category_name varchar(30),
-        product_category_name_english(30),
+        product_category_name_english varchar(30),
         PRIMARY KEY (product_category_name)
         )''' )
 
@@ -133,23 +133,12 @@ TABLES['product_category_name_translation'] = (
 
 # Créer les tables du dictionnaire TABLES
 
-"""
 for table_name in TABLES:
     table_description = TABLES[table_name]
-    print("Creating table {}: ".format(table_name), end='')
+    print("Creating table {}: \n".format(table_name), end='')
     cur.execute(table_description)
-"""
-cur.execute('''CREATE TABLE olist_customers_dataset (
-        customer_id char(32) NOT NULL,
-        customer_unique_id char(32),
-        customer_zip_code char(5),
-        customer_state char(2),
-        PRIMARY KEY (customer_id),
-        FOREIGN KEY (customer_zip_code)
-            REFERENCES olist_geolocation_dataset(geolocation_zip_code_prefix)
-            ON DELETE SET NULL
-            ON UPDATE CASCADE
-        )''')
+
+
 
 
 
