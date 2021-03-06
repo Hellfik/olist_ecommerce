@@ -47,5 +47,5 @@ Pour aller plus loin:
 
 
 ### Phase 3
-**- Requetage des données pour calculer les indicateurs **
+**- Requetage des données pour calculer les indicateurs**
 
