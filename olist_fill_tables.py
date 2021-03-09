@@ -16,7 +16,7 @@ customers_dataset = pd.read_csv('datasets/olist_customers_dataset.csv')
 
 customers_df = pd.DataFrame(customers_dataset)
 
-customers_dataset.drop_duplicates(subset=['customer_unique_id']).to_sql(
+customers_dataset.to_sql(
     name="olist_customers_dataset",
     con=con,
     index=False,
